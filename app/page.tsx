@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 export default function Home() {
   const [rows, setRows] = useState(2);
   const [input, setInput] = useState("");
-  // const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   function handlerInput(event: ChangeEvent<HTMLTextAreaElement>): void {
     setInput(event.target.value);
@@ -21,7 +21,11 @@ export default function Home() {
     return () => clearTimeout(inputTimeout);
   }, [input]);
 
-  function runPredictions() {}
+  function runPredictions() {
+    if (loading) {
+      setLoading(true);
+    }
+  }
 
   return (
     <>
