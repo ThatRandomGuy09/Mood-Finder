@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { ChangeEvent, useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
   const [rows, setRows] = useState(2);
@@ -21,9 +23,14 @@ export default function Home() {
     return () => clearTimeout(inputTimeout);
   }, [input]);
 
-  function runPredictions() {
-    if (loading) {
+  async function runPredictions() {
+    if (input) {
       setLoading(true);
+
+      const res = await axios.post("api/emotion", { input: input });
+      console.log(res);
+
+      setLoading(false);
     }
   }
 
